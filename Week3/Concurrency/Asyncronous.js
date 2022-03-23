@@ -23,6 +23,8 @@ async function init(){
     }
 }
 init();
+
+
 // Task("Bangun tidur kuterus mandi",3000)
 //     .then(function(message){ 
 //         Task("Tidak lupa menggosok gigi",2000);
