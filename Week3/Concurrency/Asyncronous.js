@@ -12,13 +12,24 @@ const Task = (taskDetail,duration) => {
     });
 };
 
-Task("Bangun tidur kuterus mandi",3000)
-    .then(function(message){ 
-        Task("Tidak lupa menggosok gigi",2000);
-    })
-    .then(() => Task("Habis mandi kutolong ibu",1000))
-    .then(() => Task("Membersihkan tempat tidurku",4000))
-    .catch(message => console.log(message));
+async function init(){
+    try{
+        await Task("Bangun tidur kuterus mandi",3000);
+        await Task("Tidak lupa menggosok gigi",2000);
+        await Task("Habis mandi kutolong ibu",1000);
+        await Task("Membersihkan tempat tidurku",4000);
+    } catch (error) {
+        console.log(error);
+    }
+}
+init();
+// Task("Bangun tidur kuterus mandi",3000)
+//     .then(function(message){ 
+//         Task("Tidak lupa menggosok gigi",2000);
+//     })
+//     .then(() => Task("Habis mandi kutolong ibu",1000))
+//     .then(() => Task("Membersihkan tempat tidurku",4000))
+//     .catch(message => console.log(message));
 
 
 // Task("Bangun tidur kuterus mandi",3000,() => {
