@@ -1,4 +1,4 @@
-// ! Contoh Callback Function, Promise (asyncronous hanya 4 task)
+// ! Contoh Callback Function, Promise, Async Await (asyncronous hanya 4 task)
 const Task = (taskDetail,duration) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -6,19 +6,21 @@ const Task = (taskDetail,duration) => {
                 reject("Enakan ngopi dulu.. gak ngopi gak uuu...")
             }else{
                 console.log(taskDetail);
-                resolve();
+                resolve("Selesai");
             }
         }, duration);
     });
 };
 
 Task("Bangun tidur kuterus mandi",3000)
-    .then(() => Task("Tidak lupa menggosok gigi",2000))
+    .then(function(message){ 
+        Task("Tidak lupa menggosok gigi",2000);
+    })
     .then(() => Task("Habis mandi kutolong ibu",1000))
     .then(() => Task("Membersihkan tempat tidurku",4000))
     .catch(message => console.log(message));
 
-    
+
 // Task("Bangun tidur kuterus mandi",3000,() => {
 //     Task("Tidak lupa menggosok gigi", 2000, () => {
 //         Task("Habis mandi kutolong ibu",1000, () => {
