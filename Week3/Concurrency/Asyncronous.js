@@ -3,7 +3,7 @@ const Task = (taskDetail,duration) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             if (duration > 3000) {
-                reject("Enakan ngopi dulu.. gak ngopi gak uuu....")
+                reject("Enakan ngopi dulu.. gak ngopi gak uuu...")
             }else{
                 console.log(taskDetail);
                 resolve("Selesai");
