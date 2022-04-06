@@ -24,8 +24,8 @@ const todos = [];
                const now = new Date().toISOString();
 
                todos.push({
-                   id: id,
-                   todo: todo,
+                   id,
+                   todo,
                    status: false,
                    created_at: now,
                    updated_at: now
@@ -68,7 +68,50 @@ const todos = [];
                     message: 'Todo item tidak ditemukan'
                 }).code(404);
             }
-        }
+        },
+
+        {
+            method: 'GET',
+            path: '/todos',
+            handler: (request,h) => {
+                return h.response({
+                    status: 'success',
+                    data: {
+                        todos
+                    }
+                })
+            }
+        },
+        {
+            method: 'PUT',
+            path: '/todos/{id}',
+            handler: (request, h) => {
+                const { id } = request.params;
+                const todo = todos.findIndex(todo => todo.id === id);
+
+                if (todo !== -1) {
+                    todos[index] = {
+                        ...todo[index],
+                        status: true,
+                        updated_at: new Date().toISOString()
+                    }
+
+                    return h.response({
+                        status: "success",
+                        message: "Status Todo berhasil di update",
+                        data: {
+                            todo: todo[index]
+                        }
+                    })
+                }
+
+                return h.response({
+                    status: 'fail',
+                    message: 'Status todo gagal di update, id tidak ditemukan'
+                }).code(404);
+
+            }
+        },
     ])
 
     await server.start();
