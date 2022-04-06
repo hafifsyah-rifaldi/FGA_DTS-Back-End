@@ -89,9 +89,9 @@ const todos = [];
                 const { id } = request.params;
                 const todo = todos.findIndex(todo => todo.id === id);
 
-                if (todo !== -1) {
+                if (index !== -1) {
                     todos[index] = {
-                        ...todo[index],
+                        ...todos[index],
                         status: true,
                         updated_at: new Date().toISOString()
                     }
@@ -100,7 +100,7 @@ const todos = [];
                         status: "success",
                         message: "Status Todo berhasil di update",
                         data: {
-                            todo: todo[index]
+                            todo: todos[index]
                         }
                     })
                 }
@@ -110,6 +110,29 @@ const todos = [];
                     message: 'Status todo gagal di update, id tidak ditemukan'
                 }).code(404);
 
+            }
+        },
+
+        {
+            method: 'DELETE',
+            path: '/todos/{id}',
+            handler: (request, h) => {
+                const {id} = request.params;
+                const index = todos.findIndex(todo => todo.id === id);
+
+                if (index !== -1) {
+                    todos.splice(index,1);
+                    
+                    return h.response({
+                        status:'success',
+                        message: 'Berhasil hapus Todo item'
+                    }).code(200);
+                }
+
+                return h.response({
+                    status: 'fail',
+                    message: 'Gagal hapus todo item, id tidak ditemukan'
+                }).code(404);
             }
         },
     ])
