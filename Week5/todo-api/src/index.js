@@ -40,14 +40,34 @@ const todos = [];
                         }
                     }).code(201);
                }
-               
+
                return h.response({
                    status: 'fail',
                    message: 'Gagal menambahkan Todo Item'
                }).code(500);
             }
-
-
+        },
+        {
+            method: "GET",
+            path: "/todos/{id}",
+            handler: (request,h) => {
+                const { id } = request.params;
+                const todo = todos.find(todo => todo.id === id);
+                
+                if(todo !== undefined){
+                    return h.response({
+                        status: 'success',
+                        data: {
+                            todo
+                        }
+                    }).code(200);
+                }
+                
+                return h.response({
+                    status: 'fail',
+                    message: 'Todo item tidak ditemukan'
+                }).code(404);
+            }
         }
     ])
 
